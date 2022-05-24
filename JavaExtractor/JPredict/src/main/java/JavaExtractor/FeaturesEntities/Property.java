@@ -154,7 +154,7 @@ public class Property {
 
         String nameToSplit = node.toString();
         if (isGenericParent) {
-            nameToSplit = ((ClassOrInterfaceType) node).getName();
+            nameToSplit = ((ClassOrInterfaceType) node).getName().toString();
             if (isLeaf) {
                 // if it is a generic parent which counts as a leaf, then when
                 // it is participating in a path

@@ -12,14 +12,18 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.lang.StringBuilder;
+
+import org.json.JSONObject;
+import org.json.JSONArray;
 
 class ExtractFeaturesTask implements Callable<Void> {
     private final CommandLineValues m_CommandLineValues;
-    private final Path filePath;
+    private final String fileLine;
 
-    public ExtractFeaturesTask(CommandLineValues commandLineValues, Path path) {
+    public ExtractFeaturesTask(CommandLineValues commandLineValues, String line) {
         m_CommandLineValues = commandLineValues;
-        this.filePath = path;
+        this.fileLine = line;
     }
 
     @Override
@@ -47,22 +51,45 @@ class ExtractFeaturesTask implements Callable<Void> {
     }
 
     private ArrayList<ProgramFeatures> extractSingleFile() throws IOException {
-        String code;
+        // Modified to only extract strings, not files;
+        String code = collectJson(fileLine);
 
-        if (m_CommandLineValues.MaxFileLength > 0 &&
-                Files.lines(filePath, Charset.defaultCharset()).count() > m_CommandLineValues.MaxFileLength) {
-            return new ArrayList<>();
-        }
-        try {
-            code = new String(Files.readAllBytes(filePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-            code = Common.EmptyString;
-        }
+        // if (m_CommandLineValues.MaxFileLength > 0 && Files.lines(filePath, Charset.defaultCharset()).count() > m_CommandLineValues.MaxFileLength) {
+        //     return new ArrayList<>();
+        // }
+        // try {
+        //     code = new String(Files.readAllBytes(filePath));
+        //     code = collectJson(code);
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        //     code = Common.EmptyString;
+        // }
+        
         FeatureExtractor featureExtractor = new FeatureExtractor(m_CommandLineValues);
 
+   
         return featureExtractor.extractFeatures(code);
     }
+
+    private String collectJson(String json) {
+        JSONObject jo = new JSONObject(json);
+     
+        StringBuilder full_entry = new StringBuilder();
+        StringBuilder javaDoc = new StringBuilder().append("/**");
+        String doc = (String) jo.get("docstring");
+
+        doc.lines().forEach(l -> {
+          if (l.length() > 0 && l.charAt(0) == '@') return; // only skips this iteration!
+          javaDoc.append(l + "\n");
+        });
+        javaDoc.append("*/\n");
+
+        full_entry.append(javaDoc);
+        full_entry.append(jo.get("original_string") + "\n");
+
+        return full_entry.toString();
+    }
+
 
     public String featuresToString(ArrayList<ProgramFeatures> features) {
         if (features == null || features.isEmpty()) {
