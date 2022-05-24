@@ -21,10 +21,10 @@
 #   recommended to use a multi-core machine for the preprocessing 
 #   step and set this value to the number of cores.
 # PYTHON - python3 interpreter alias.
-TRAIN_DIR=../data/java/training
-VAL_DIR=../data/java/validation
-TEST_DIR=../data/java/test
-DATASET_NAME=processed-comments
+TRAIN_DIR=data/java-test/training
+VAL_DIR=data/java-test/validation
+TEST_DIR=data/java-test/test
+DATASET_NAME=processed-comments-test
 
 MAX_DATA_CONTEXTS=1000
 MAX_CONTEXTS=200
