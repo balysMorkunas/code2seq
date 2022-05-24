@@ -51,22 +51,11 @@ class ExtractFeaturesTask implements Callable<Void> {
     }
 
     private ArrayList<ProgramFeatures> extractSingleFile() throws IOException {
+
         // Modified to only extract strings, not files;
         String code = collectJson(fileLine);
-
-        // if (m_CommandLineValues.MaxFileLength > 0 && Files.lines(filePath, Charset.defaultCharset()).count() > m_CommandLineValues.MaxFileLength) {
-        //     return new ArrayList<>();
-        // }
-        // try {
-        //     code = new String(Files.readAllBytes(filePath));
-        //     code = collectJson(code);
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        //     code = Common.EmptyString;
-        // }
         
         FeatureExtractor featureExtractor = new FeatureExtractor(m_CommandLineValues);
-
    
         return featureExtractor.extractFeatures(code);
     }

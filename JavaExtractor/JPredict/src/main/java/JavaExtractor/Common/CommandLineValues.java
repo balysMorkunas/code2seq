@@ -40,6 +40,13 @@ public class CommandLineValues {
     @Option(name = "--max_child_id", required = false)
     public int MaxChildId = 3;
 
+    @Option(name = "--inline_comments", required = false)
+    public boolean InlineComments = false;
+    
+    @Option(name = "--generate_ast", required = false)
+    public boolean GenerateAST = false;
+
+
     public CommandLineValues(String... args) throws CmdLineException {
         CmdLineParser parser = new CmdLineParser(this);
         try {

@@ -53,14 +53,17 @@ class FeatureExtractor {
   public ArrayList<ProgramFeatures> extractFeatures(String code) {
     CompilationUnit m_CompilationUnit = parseFileWithRetries(code);
 
-    // Now comes the inspection code:
-    // DotPrinter printer = new DotPrinter(true);
-    // try (FileWriter fileWriter = new FileWriter("ast.dot");
-    // PrintWriter printWriter = new PrintWriter(fileWriter)) {
-    // printWriter.print(printer.output(m_CompilationUnit));
-    // } catch(Exception e) {
-    // System.out.println(e);
-    // }
+    // generates a dot file that can be converted into
+    // and AST with Graphviz
+    if (m_CommandLineValues.GenerateAST) {
+      DotPrinter printer = new DotPrinter(true);
+      try (FileWriter fileWriter = new FileWriter("ast.dot");
+          PrintWriter printWriter = new PrintWriter(fileWriter)) {
+        printWriter.print(printer.output(m_CompilationUnit));
+      } catch (Exception e) {
+        System.out.println(e);
+      }
+    }
 
     FunctionVisitor functionVisitor = new FunctionVisitor(m_CommandLineValues);
 
