@@ -5,7 +5,7 @@ lmdb
 networkx
 numpy==1.19.2
 requests
-rouge==0.3.2
+rouge==1.0.0
 scikit_learn
 setuptools
 six

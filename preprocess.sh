@@ -21,10 +21,10 @@
 #   recommended to use a multi-core machine for the preprocessing 
 #   step and set this value to the number of cores.
 # PYTHON - python3 interpreter alias.
-TRAIN_DIR=data/java-test/training
-VAL_DIR=data/java-test/validation
-TEST_DIR=data/java-test/test
-DATASET_NAME=processed-comments-test
+TRAIN_DIR=data/java/training
+VAL_DIR=data/java/validation
+TEST_DIR=data/java/test
+DATASET_NAME=CSN_NC
 
 MAX_DATA_CONTEXTS=1000
 MAX_CONTEXTS=200
@@ -37,19 +37,19 @@ PYTHON=python3
 TRAIN_DATA_FILE=${DATASET_NAME}.train.raw.txt
 VAL_DATA_FILE=${DATASET_NAME}.val.raw.txt
 TEST_DATA_FILE=${DATASET_NAME}.test.raw.txt
-EXTRACTOR_JAR=JavaExtractor/JPredict/target/JavaExtractor-0.0.1-SNAPSHOT.jar #JavaExtractorForComments.jar
+EXTRACTOR_JAR=JavaExtractor/JPredict/target/JavaExtractor-0.0.1-SNAPSHOT.jar
 
 mkdir -p data
 mkdir -p data/${DATASET_NAME}
 
 echo "Extracting paths from validation set..."
-${PYTHON} JavaExtractor/extract.py --dir ${VAL_DIR} --max_path_length 8 --max_path_width 2 --num_threads ${NUM_THREADS} --jar ${EXTRACTOR_JAR} > ${VAL_DATA_FILE} 2>> error_log.txt
+${PYTHON} JavaExtractor/extract.py --dir ${VAL_DIR} --max_path_length 12 --max_path_width 4 --num_threads ${NUM_THREADS} --jar ${EXTRACTOR_JAR} > ${VAL_DATA_FILE} 2>> error_log.txt
 echo "Finished extracting paths from validation set"
 echo "Extracting paths from test set..."
-${PYTHON} JavaExtractor/extract.py --dir ${TEST_DIR} --max_path_length 8 --max_path_width 2 --num_threads ${NUM_THREADS} --jar ${EXTRACTOR_JAR} > ${TEST_DATA_FILE} 2>> error_log.txt
+${PYTHON} JavaExtractor/extract.py --dir ${TEST_DIR} --max_path_length 12 --max_path_width 4 --num_threads ${NUM_THREADS} --jar ${EXTRACTOR_JAR} > ${TEST_DATA_FILE} 2>> error_log.txt
 echo "Finished extracting paths from test set"
 echo "Extracting paths from training set..."
-${PYTHON} JavaExtractor/extract.py --dir ${TRAIN_DIR} --max_path_length 8 --max_path_width 2 --num_threads ${NUM_THREADS} --jar ${EXTRACTOR_JAR} | shuf > ${TRAIN_DATA_FILE} 2>> error_log.txt
+${PYTHON} JavaExtractor/extract.py --dir ${TRAIN_DIR} --max_path_length 12 --max_path_width 4 --num_threads ${NUM_THREADS} --jar ${EXTRACTOR_JAR} | shuf > ${TRAIN_DATA_FILE} 2>> error_log.txt
 echo "Finished extracting paths from training set"
 
 TARGET_HISTOGRAM_FILE=data/${DATASET_NAME}/${DATASET_NAME}.histo.tgt.c2s
