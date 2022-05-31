@@ -1,0 +1,17 @@
+clang
+joblib
+libclang
+lmdb
+networkx
+numpy==1.19.2
+requests
+rouge==0.3.2
+scikit_learn
+setuptools
+six
+tensorflow==2.1
+tensorflow_addons==0.8.3
+tensorboard
+tensorflow_estimator
+flatbuffers
+tqdm

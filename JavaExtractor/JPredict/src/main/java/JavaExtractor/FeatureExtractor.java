@@ -91,13 +91,13 @@ class FeatureExtractor {
         parsed = JavaParser.parse(content);
       } catch (ParseProblemException e2) {
         // Wrap with a class only
-        try {
+        // try {
           content = classPrefix + code + classSuffix;
           parsed = JavaParser.parse(content);
-        } catch (ParseProblemException e3) {
-          content = "";
-          parsed = JavaParser.parse(content);
-        }
+        // } catch (ParseProblemException e3) { // Idea for future: dont catch anything to let it fail and add nothing! 
+        //   content = "";
+        //   parsed = JavaParser.parse(content);
+        // }
       }
     }
     return parsed;

@@ -66,11 +66,11 @@ class ExtractFeaturesTask implements Callable<Void> {
         StringBuilder full_entry = new StringBuilder();
         StringBuilder javaDoc = new StringBuilder().append("/**");
         String doc = (String) jo.get("docstring");
+        
+        String summary = doc.lines().filter(l -> !l.contains("=") && !l.contains("-") && !l.startsWith("<") && !l.startsWith("("))
+                   .findFirst().orElseThrow();
 
-        doc.lines().forEach(l -> {
-          if (l.length() > 0 && l.charAt(0) == '@') return; // only skips this iteration!
-          javaDoc.append(l + "\n");
-        });
+        javaDoc.append(summary + "\n");
         javaDoc.append("*/\n");
 
         full_entry.append(javaDoc);
