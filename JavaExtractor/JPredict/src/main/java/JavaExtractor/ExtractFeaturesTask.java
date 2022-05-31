@@ -69,6 +69,7 @@ class ExtractFeaturesTask implements Callable<Void> {
         
         String summary = doc.lines().filter(l -> !l.contains("=") && !l.contains("-") && !l.startsWith("<") && !l.startsWith("("))
                    .findFirst().orElseThrow();
+        System.out.println(summary.split("\\s+").length);
 
         javaDoc.append(summary + "\n");
         javaDoc.append("*/\n");
