@@ -19,5 +19,5 @@ module load openjdk/11.0.12_7-k7npudp
 
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
-srun bash preprocess.sh
+srun bash preprocess.sh --unbuffered
 
