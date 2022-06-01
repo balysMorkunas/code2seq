@@ -5,7 +5,7 @@ class Config:
         config.NUM_EPOCHS = 3000
         config.SAVE_EVERY_EPOCHS = 1
         config.PATIENCE = 10
-        config.BATCH_SIZE = 1
+        config.BATCH_SIZE = 128
         config.READER_NUM_PARALLEL_BATCHES = 1
         config.SHUFFLE_BUFFER_SIZE = 10000
         config.CSV_BUFFER_SIZE = 100 * 1024 * 1024  # 100 MB
@@ -18,9 +18,9 @@ class Config:
         config.NUM_DECODER_LAYERS = 2
         config.MAX_PATH_LENGTH = 8 + 1
         config.MAX_NAME_PARTS = 5
-        config.MAX_TARGET_PARTS = 6
-        config.EMBEDDINGS_DROPOUT_KEEP_PROB = 0.75
-        config.RNN_DROPOUT_KEEP_PROB = 0.5
+        config.MAX_TARGET_PARTS = 37
+        config.EMBEDDINGS_DROPOUT_KEEP_PROB = 0.3
+        config.RNN_DROPOUT_KEEP_PROB = 0.75
         config.BIRNN = True
         config.RANDOM_CONTEXTS = True
         config.BEAM_WIDTH = 0

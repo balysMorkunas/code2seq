@@ -26,7 +26,6 @@ def ParallelExtractDir(args, dir):
 
 
 def ExtractFeaturesForDir(args, dir, prefix):
-    print("COMMENTS:", args.inline_comments, file=sys.stderr)
     command = [
         "java",
         "-Xmx100g",
