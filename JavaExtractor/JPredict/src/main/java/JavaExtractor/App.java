@@ -79,7 +79,7 @@ public class App {
       try {
         f.get();
       } catch (InterruptedException | ExecutionException e) {
-        e.printStackTrace();
+        // e.printStackTrace();
       }
     });
   }
