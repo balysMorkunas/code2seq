@@ -21,10 +21,10 @@
 #   recommended to use a multi-core machine for the preprocessing 
 #   step and set this value to the number of cores.
 # PYTHON - python3 interpreter alias.
-TRAIN_DIR=data/java/training
-VAL_DIR=data/java/validation
-TEST_DIR=data/java/test
-DATASET_NAME=CSN_NC
+TRAIN_DIR=data/java-mini/training
+VAL_DIR=data/java-mini/validation
+TEST_DIR=data/java-mini/test
+DATASET_NAME=CSN_C
 
 MAX_DATA_CONTEXTS=1000
 MAX_CONTEXTS=200
@@ -43,13 +43,13 @@ mkdir -p data
 mkdir -p data/${DATASET_NAME}
 
 echo "Extracting paths from validation set..."
-${PYTHON} JavaExtractor/extract.py --dir ${VAL_DIR} --max_path_length 12 --max_path_width 4 --num_threads ${NUM_THREADS} --jar ${EXTRACTOR_JAR} > ${VAL_DATA_FILE} 2>> error_log.txt
+${PYTHON} JavaExtractor/extract.py --dir ${VAL_DIR} --max_path_length 12 --max_path_width 4 --inline_comments --num_threads ${NUM_THREADS} --jar ${EXTRACTOR_JAR} > ${VAL_DATA_FILE} 2>> error_log.txt
 echo "Finished extracting paths from validation set"
 echo "Extracting paths from test set..."
-${PYTHON} JavaExtractor/extract.py --dir ${TEST_DIR} --max_path_length 12 --max_path_width 4 --num_threads ${NUM_THREADS} --jar ${EXTRACTOR_JAR} > ${TEST_DATA_FILE} 2>> error_log.txt
+${PYTHON} JavaExtractor/extract.py --dir ${TEST_DIR} --max_path_length 12 --max_path_width 4 --inline_comments --num_threads ${NUM_THREADS} --jar ${EXTRACTOR_JAR} > ${TEST_DATA_FILE} 2>> error_log.txt
 echo "Finished extracting paths from test set"
 echo "Extracting paths from training set..."
-${PYTHON} JavaExtractor/extract.py --dir ${TRAIN_DIR} --max_path_length 12 --max_path_width 4 --num_threads ${NUM_THREADS} --jar ${EXTRACTOR_JAR} | shuf > ${TRAIN_DATA_FILE} 2>> error_log.txt
+${PYTHON} JavaExtractor/extract.py --dir ${TRAIN_DIR} --max_path_length 12 --max_path_width 4 --inline_comments --num_threads ${NUM_THREADS} --jar ${EXTRACTOR_JAR} | shuf > ${TRAIN_DATA_FILE} 2>> error_log.txt
 echo "Finished extracting paths from training set"
 
 TARGET_HISTOGRAM_FILE=data/${DATASET_NAME}/${DATASET_NAME}.histo.tgt.c2s
