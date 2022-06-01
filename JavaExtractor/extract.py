@@ -26,6 +26,7 @@ def ParallelExtractDir(args, dir):
 
 
 def ExtractFeaturesForDir(args, dir, prefix):
+    print("COMMENTS:", args.inline_comments, file=sys.stderr)
     command = [
         "java",
         "-Xmx100g",
@@ -41,8 +42,9 @@ def ExtractFeaturesForDir(args, dir, prefix):
         dir,
         "--num_threads",
         str(args.num_threads),
-        "--inline_comments" if args.inline_comments is not None else "",
     ]
+    if args.inline_comments == "true":
+        command.append("--inline_comments")
 
     # print command
     # os.system(command)
@@ -113,8 +115,13 @@ if __name__ == "__main__":
     parser.add_argument("-j", "--jar", dest="jar", required=True)
     parser.add_argument("-dir", "--dir", dest="dir", required=False)
     parser.add_argument("-file", "--file", dest="file", required=False)
-    parser.add_argument("-inline_comments", "--inline_comments",
-            dest="inline_comments", required=False, default=False)
+    parser.add_argument(
+        "-inline_comments",
+        "--inline_comments",
+        dest="inline_comments",
+        required=False,
+        default=False,
+    )
     args = parser.parse_args()
 
     if args.file is not None:
