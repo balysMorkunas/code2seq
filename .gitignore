@@ -6,3 +6,4 @@
 *.out
 error_log.txt
 /data/
+/models/

@@ -1,23 +1,17 @@
 #!/bin/sh
 #
-#SBATCH --job-name="preprocess_nc"
-#SBATCH --partition=compute
+#SBATCH --job-name="preprocess"
+#SBATCH --partition=memory
 #SBATCH --time=24:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=48
-#SBATCH --mem-per-cpu=3G
+#SBATCH --mem=1500G
 
 module load DefaultModules
 module load 2022r1
 module load compute
-module load python/3.8.12-p6aunbm
 module load py-pip
-module load py-tqdm
-module load openmpi/4.1.1-urzuzcv 
-module load py-tensorflow
 module load openjdk/11.0.12_7-k7npudp
 
-export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
-
-srun bash pre_nc.sh
+srun bash pre_nc.sh --unbuffered
 

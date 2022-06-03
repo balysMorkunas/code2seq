@@ -27,4 +27,4 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/beegfs/scratch/bmorkunas/TensorRT-6.0.1
 echo $(which python)
 echo $CONDA_PREFIX
 
-srun sh gpu_train.sh
+srun sh nc_gpu_train.sh

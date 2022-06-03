@@ -5,12 +5,12 @@
 # test_data: by default, points to the validation set, since this is the set that
 #   will be evaluated after each training iteration. If you wish to test
 #   on the final (held-out) test set, change 'val' to 'test'.
-type=cns_c
-dataset_name=CSN_C
-data_dir=data/CSN_C
+type=cns_nc
+dataset_name=CSN_NC
+data_dir=data/CSN_NC
 data=${data_dir}/${dataset_name}
 test_data=${data_dir}/${dataset_name}.val.c2s
-model_dir=models/com/${type}
+model_dir=models/no_com/${type}
 
 mkdir -p ${model_dir}
 set -e
