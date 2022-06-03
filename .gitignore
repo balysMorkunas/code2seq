@@ -3,7 +3,6 @@
 .idea/*
 *.iml
 *.pyc
-*.out
 error_log.txt
 /data/
 /models/
