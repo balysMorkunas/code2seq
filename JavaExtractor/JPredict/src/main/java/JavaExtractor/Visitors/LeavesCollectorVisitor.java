@@ -47,7 +47,7 @@ public class LeavesCollectorVisitor extends TreeVisitor {
       // Check if it is not javadoc or contains code.
       Optional<Comment> com = node.getComment();
       if (com.isPresent() && !(com.get() instanceof JavadocComment) && !containsCode(com.get().getContent())) {
-        String updatedComment = removeStopWords(com.get().getContent());
+        String updatedComment = com.get().getContent(); // removeStopWords(com.get().getContent());
         m_Leaves.add(node.setComment(com.get().setContent(updatedComment)));
       }
     }
