@@ -2,10 +2,16 @@ from nltk.tokenize import word_tokenize
 from nltk.translate.bleu_score import sentence_bleu
 from nltk.translate.bleu_score import SmoothingFunction
 import scipy.stats as stats
+from bisect import bisect_left
+from typing import List
+from cliffs_delta import cliffs_delta
 
 no_com_jac = []
 com_jac = []
-
+# for _ in range(1000000):
+#     no_com_jac.append(1)
+#     com_jac.append(1)
+#
 no_com_bleu = []
 com_bleu = []
 
@@ -36,7 +42,6 @@ for i, ref in enumerate(references):
     com_bleu.append(bleu)
     no_com_bleu.append(bleu_no)
 
-
 print(
     "Rank Sum with BLEU:\n", stats.ranksums(com_bleu, no_com_bleu, alternative="less")
 )
@@ -44,3 +49,7 @@ print(
     "Rank Sum  with Jaccard Distance:\n",
     stats.ranksums(com_jac, no_com_jac, alternative="less"),
 )
+
+
+print("BLEU Cliff Delta:", cliffs_delta(com_bleu, no_com_bleu))
+print("Jaccard Cliff Delta:", cliffs_delta(com_jac, no_com_jac))
