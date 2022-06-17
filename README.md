@@ -14,7 +14,7 @@ The main changes are:
 * `FunctionVisitor.java`: Change label from method name to JavaDoc comment.
 * `LeavesCollectorVisitor.java`: Inline comment processing
 * `ExtractFeaturesTask.java` and `App.java`: Changing data input formatting (required for different datasets).
-* `scritps/`: Scripts fro preprocessing, training, evaluation, statistical tests.
+* `scritps/`: Scripts for preprocessing, training, evaluation, statistical tests.
 * See git commit history for other, smaller changes.
 
 
