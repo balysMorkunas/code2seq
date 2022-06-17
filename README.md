@@ -6,7 +6,7 @@ This is an **UNOFFICIAL** implementation of the model described in:
 This is a TensorFlow 2.1 fork of the network inplementation, with Java and C# extractors for preprocessing the input code.
 The official network implementation repository is [https://github.com/tech-srl/code2seq](https://github.com/tech-srl/code2seq)
 
-=================
+
 Additionally, I have forked the Kolkir TF implementation and modified JavaExtractor to parse the [CodeSearchNet](https://github.com/github/codesearchnet) Java dataset. This dataset is used to train the model for Documentation Generation. I used the model to see how inline comments in training data effect performance.
 
 The main changes are:
