@@ -1,5 +1,6 @@
 #!/usr/bin/env perl
-#
+# 
+# Credits to: https://github.com/moses-smt/mosesdecoder/blob/master/scripts/generic/multi-bleu.perl
 # This file is part of moses.  Its use is licensed under the GNU Lesser General
 # Public License version 2.1 or, at your option, any later version.
 

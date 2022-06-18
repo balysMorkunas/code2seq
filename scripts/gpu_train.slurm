@@ -1,23 +1,30 @@
-#!/bin/sh -l
+#!/bin/sh
 #
-#SBATCH --job-name=train
+#SBATCH --job-name="c2s_train"
 #SBATCH --partition=gpu
-#SBATCH --time=05:00:00
+#SBATCH --time=24:00:00
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=24
-#SBATCH --gpus-per-task=2
-#SBATCH --mem-per-cpu=1G
-#SBATCH --gres=gpu:2
+#SBATCH --cpus-per-task=48
+#SBATCH --gpus-per-task=1
+#SBATCH --mem-per-cpu=4G
 
 module load 2022r1
 module load gpu
-# module load python/3.8.12-p6aunbm
-module load py-pip
 module load openmpi
-#module load py-tensorflow
-#module load openjdk/11.0.12_7-k7npudp
-python -m pip install -r requirements.txt --user
+module load python
+module load miniconda3
+module load openssh
+module load git
 
-#export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+echo $(module list)
 
-srun sh train.sh
+unset CONDA_SHLVL
+source "$(conda info --base)/etc/profile.d/conda.sh"
+source activate c2s
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/beegfs/scratch/bmorkunas/TensorRT-6.0.1.5/lib
+
+echo $(which python)
+echo $CONDA_PREFIX
+
+srun sh gpu_train.sh

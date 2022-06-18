@@ -8,10 +8,6 @@ from cliffs_delta import cliffs_delta
 
 no_com_jac = []
 com_jac = []
-# for _ in range(1000000):
-#     no_com_jac.append(1)
-#     com_jac.append(1)
-#
 no_com_bleu = []
 com_bleu = []
 
